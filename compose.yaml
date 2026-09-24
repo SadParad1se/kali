@@ -1,0 +1,21 @@
+services:
+  kali:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: kali-hashcat
+
+    gpus: all
+    runtime: nvidia
+    environment:
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+
+    volumes:
+      - ./shared:/shared
+
+    stdin_open: true
+    tty: true
+
+    restart: unless-stopped
